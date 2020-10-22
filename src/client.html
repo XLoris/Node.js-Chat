@@ -1,0 +1,130 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>LE CHAT DE LA TEAM</title>
+    <script src="/socket.io/socket.io.js"></script> 
+    <script src="script.js"></script>
+  </head>
+  <body>
+
+  <style>
+    body {
+      padding: 0;
+      margin: 0;
+      display: flex;
+      justify-content: center;
+    }
+
+    h2, h3{
+      padding-top:25px;
+      text-align: center;
+    }
+
+    #message-container {
+      width: 80%;
+      max-width: 1200px;
+    }
+
+    #message-container div {
+      background-color: #CCC;
+      padding: 5px;
+    }
+
+    #message-container div:nth-child(2n) {
+      background-color: #FFF;
+    }
+
+    #send-container {
+      position: fixed;
+      padding-bottom: 30px;
+      bottom: 0;
+      background-color: white;
+      max-width: 1200px;
+      width: 80%;
+      display: flex;
+    }
+
+    #message-input {
+      flex-grow: 1;
+    }
+
+    .closebtn{
+    position:absolute;
+    top:20px;
+    right:45px;
+    font-size:60px;
+    cursor:pointer;
+    color:#fff;
+
+}
+
+.popup_wrap{
+    width:600px; 
+    height:400px;
+    margin-left:auto; 
+    margin-right:auto;
+    margin-top:100px;
+    background-color: white;
+}
+
+.pseudo_select{
+      display: flex;
+      justify-content: center;
+      padding-top:20px;
+}
+
+#list_pseudos span{
+  padding-right:40px;
+  text-align:center;
+}
+
+
+#overlay {
+    position: fixed; /* Sit on top of the page content */
+    display:none; /* Hidden by default */
+    width: 100%; /* Full width (cover the whole page) */
+    height: 100%; /* Full height (cover the whole page) */
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0,0,0,0.5); /* Black background with opacity */
+    z-index: 2; /* Specify a stack order in case you're using a different order for other elements */
+  }
+
+  #trailer>a{
+    cursor: pointer;
+  }
+
+  #pseudoLocal{
+    margin-left: 10px;
+  }
+
+    span{
+      display:block;
+      margin-bottom:10px;
+    }
+  </style>
+<body>
+                                
+    <div id="overlay">
+       
+      <div class="popup_wrap">
+        <h2>Bienvenue !</h2>
+        <h3>Choisissez un pseudo.</h3>
+        <div class="pseudo_select">
+        <input type="text" id="pseudo-input" onkeypress="enterKeyPseudo(event)">
+        <input type="button" id="ok-button" onclick="off()" value="OK">
+        </div>
+      </div>
+    
+    </div>
+  <div id="list_pseudos"></div>
+  <div id="message-container"></div>
+  <form id="send-container" onsubmit="return false">
+    <input type="text" id="message-input" onkeypress="enterKey(event)">
+    <input type="button" id="send-button" onclick="champ()" value="Envoyer"><br/>
+    <div id="pseudoLocal"></div>
+  </form>
+</body>
+</html>
