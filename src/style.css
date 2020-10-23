@@ -1,0 +1,127 @@
+body {
+    padding: 0;
+    margin: 0;
+    overflow:hidden;
+  }
+
+  h2, h3{
+    padding-top:25px;
+    text-align: center;
+  }
+
+  #message-container div {
+    background-color: #CCC;
+    padding: 5px;
+  }
+
+  #message-container div:nth-child(2n) {
+    background-color: #FFF;
+  }
+
+
+  #message-input {
+    flex-grow: 1;
+  }
+
+
+.popup_wrap{
+  width:600px; 
+  height:400px;
+  margin-left:auto; 
+  margin-right:auto;
+  margin-top:100px;
+  background-color: white;
+}
+
+.pseudo_select{
+    display: flex;
+    justify-content: center;
+    padding-top:20px;
+}
+
+#list_pseudos{
+margin-top:20px;
+text-align:center; 
+height:100%;
+clear:both;
+}
+
+
+#overlay {
+  position: fixed; /* Sit on top of the page content */
+  display:none; /* Hidden by default */
+  width: 100%; /* Full width (cover the whole page) */
+  height: 100%; /* Full height (cover the whole page) */
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0,0,0,0.5); /* Black background with opacity */
+  z-index: 2; /* Specify a stack order in case you're using a different order for other elements */
+}
+
+#pseudoLocal{
+  margin-left: 10px;
+}
+
+  span{
+    display:block;
+  }
+
+  .span_grey{
+    background-color: #CCC;
+    display:block;
+  }
+
+  .span_white{
+    display:block;
+  }
+
+  #list_pseudos span{
+    text-align:center;
+  }
+
+  .pseudos{
+    display:block;
+  }
+
+  #titleP{
+    text-align:center;
+    clear:both;
+  }
+
+  #testB{
+    position:absolute;
+    height:200px;
+    display:block;
+    min-width:20%;
+    margin:0 auto;
+  }
+
+  #message-container {
+    margin:0 auto;
+    height:80%;
+    width: 60%;
+    overflow:auto;
+    border: 1px solid black;
+    flex-grow: 1;
+    background-color: rgb(255, 255, 255);
+  }
+
+  #send-container {
+    padding-bottom: 30px;
+    bottom: 0;
+    margin:0 auto;
+    background-color: white;
+
+    width: 60%;
+    display: flex;
+  }
+
+  ::-webkit-scrollbar {
+    display: none;
+}
+
+html { overflow-y: hidden; }
+  
+
