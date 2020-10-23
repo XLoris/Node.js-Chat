@@ -1,9 +1,8 @@
 const http = require("http");
-const fs = require("fs");
 const socketio = require("socket.io"); // On envoie client.html au client
 const tab_pseudos = [];
+const tab_colors = [];
 const express = require('express')
-const path = require('path')
 const app = express()
 const server = http.createServer(app)
 const io = socketio(server)
@@ -25,24 +24,39 @@ io.on("connection", function (newSockClient) {
     var content_serv = [content, tab_pseudos[newSockClient.id]];
     newSockClient.broadcast.emit("new-message", content_serv);
   });
-  newSockClient.on("entree-pseudo", function (pseudo) {
-    tab_pseudos[newSockClient.id] = pseudo;
+  newSockClient.on("entree-pseudo", function (pack) {
+    tab_pseudos[newSockClient.id] = pack[0];
+    tab_colors[pack[0]] = pack[1];
     var tab_pseudos_serv = [];
+    var tab_colors_serv = [];
     for (var key in tab_pseudos) {
       tab_pseudos_serv.push(tab_pseudos[key]);
     }
+    for (var key in tab_colors) {
+      tab_colors_serv.push(tab_colors[key]);
+    }
 
-    newSockClient.emit("list_pseudos", tab_pseudos_serv);
-    newSockClient.broadcast.emit("fix_list", tab_pseudos_serv);
+    var packet = [tab_pseudos_serv,tab_colors_serv]
+
+    newSockClient.emit("list_pseudos", packet);
+    newSockClient.broadcast.emit("fix_list", packet);
   });
 
   newSockClient.on("disconnect", function () {
+    delete tab_colors[tab_pseudos[newSockClient.id]];
     delete tab_pseudos[newSockClient.id];
     var tab_pseudos_new = [];
+    var tab_colors_new = [];
     for (var key in tab_pseudos) {
       tab_pseudos_new.push(tab_pseudos[key]);
     }
-    newSockClient.broadcast.emit("fix_list", tab_pseudos_new);
+    for (var key in tab_colors) {
+      tab_colors_new.push(tab_colors[key]);
+    }
+
+    var packet = [tab_pseudos_new,tab_colors_new]
+
+    newSockClient.broadcast.emit("fix_list", packet);
   });
 });
 
