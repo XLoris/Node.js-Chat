@@ -142,11 +142,11 @@ socket.on("new-message", function (content_serv) {
   element.appendChild(para);
 });
 
-function ColorMsg(){
+/* function ColorMsg(){
 
   var listSpan = document.getElementById("message-container").children;
   for (i = 0; i <= listSpan.length - 1; i++) {
     listSpan[i].setAttribute('style',"background-color:red;")
 
   }
-}
+} */
