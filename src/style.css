@@ -15,7 +15,6 @@ html, body {
     margin: 0;
     overflow:hidden;
     scrollbar-width:none;
-  height:100vh;
   }
 
   h1{
@@ -311,7 +310,7 @@ clear:both;
 
 @media (max-width:768px){
   #bot{
-    height:30%;
+    height:5%;
   }
 
   #message-container{
