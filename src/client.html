@@ -1,347 +1,52 @@
-@import url('https://fonts.googleapis.com/css2?family=Open+Sans&display=swap');
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="HandheldFriendly" content="true">
+    <title>LE CHAT DE LA TEAM 34</title>
+    <script src="/socket.io/socket.io.js"></script> 
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+<body>                  
+    <div id="overlay">
+       
+      <div class="popup_wrap">
+        <h2>Bienvenue !</h2>
+        <h3>Choisissez un pseudo.</h3>
+        <div class="pseudo_select">
+        <input type="text" id="pseudo-input" onkeypress="enterKeyPseudo(event)" onkeyup="verif(this);">
+        <input type="color" id="color-input">
+        <input type="button" id="ok-button" onclick="intermediaire()" value="OK">
+        </div>
+      </div>
 
-/* $primary: rgba(23, 190, 187, 1);
-$secondary: rgba(240, 166, 202, 1);
-
-$active: rgba(23, 190, 187, 0.8);
-$busy: rgba(252, 100, 113, 0.8);
-$away: rgba(255, 253, 130, 0.8); */
-
-
-html, body {
-  background: linear-gradient(120deg, rgba(23, 190, 187, 1), rgba(240, 166, 202, 1));
-  font-family: 'Open Sans', sans-serif;
-    padding: 0;
-    margin: 0;
-    overflow:hidden;
-    scrollbar-width:none;
-  }
-
-  h1{
-    text-align:center;
-    color:white;
-  }
-
-  h2, h3{
-    padding-top:25px;
-    text-align: center;
-  }
-
-  #top{
-    height:5%;
-    padding-bottom:15px;
-    margin:0 auto;
-    width: 95%;
-  }
-  #bot{
-    width:100%;
-    height:30%;
-  }
-
-  #message-container div {
-    background-color: #CCC;
-    padding: 5px;
-  }
-
-  #message-container div:nth-child(2n) {
-    background-color: #FFF;
-  }
-
-
-  #message-input {
-    font-family: 'Open Sans', sans-serif;
-    width:80%;
-    flex-grow: 1;
-    height:40px;
-    opacity:0.4;
-    padding-left:10px;
-  }
-
-  #pseudo-input{
-    opacity:0.6;
-  }
-
-  #ok-bouton {
-    background-color: #bbb;
-    padding: .5em;
-    -moz-border-radius: 5px;
-    -webkit-border-radius: 5px;
-    border-radius: 6px;
-    color: #fff;
-    font-family: 'Oswald';
-    font-size: 20px;
-    text-decoration: none;
-    border: none;
-   }
-   #ok-bouton:hover {
-    border: none;
-    background: orange;
-    box-shadow: 0px 0px 1px #777;
-   }
-
-.popup_wrap{
-  color:white;
-  width:40%; 
-  height:40%;
-  margin-left:auto; 
-  margin-right:auto;
-  margin-top:100px;
-  background: linear-gradient(120deg, rgba(23, 190, 187, 0.650), rgba(240, 166, 202, 0.650));
-}
-
-.pseudo_select{
-    display: flex;
-    justify-content: center;
-    padding-top:20px;
-}
-
-#list_pseudos{
-margin-top:20px;
-text-align:center; 
-height:100%;
-clear:both;
-}
-
-
-#overlay {
-  position: fixed; /* Sit on top of the page content */
-  display:none; /* Hidden by default */
-  width: 100%; /* Full width (cover the whole page) */
-  height: 100%; /* Full height (cover the whole page) */
-  background-color: rgba(0,0,0,0.5); /* Black background with opacity */
-  z-index: 2; /* Specify a stack order in case you're using a different order for other elements */
-}
-
-#overlay_b {
-  position: fixed; /* Sit on top of the page content */
-  display:none; /* Hidden by default */
-  width: 100%; /* Full width (cover the whole page) */
-  height: 100%; /* Full height (cover the whole page) */
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: rgba(0,0,0,0.5); /* Black background with opacity */
-  z-index: 3; /* Specify a stack order in case you're using a different order for other elements */
-}
-
-#pseudoLocal{
-  margin-left: 10px;
-  display:none;
-}
-
-  span{
-    display:block;
-  }
-
-  .spanEnvoi{
-    width:max-content !important;
-    color:white;
-    clear:both;
-    margin-left:auto !important;
-    margin:10 10 2 10;
-    padding:10 10 5 10;
-    height:30px;
-    background-color: rgba(255, 255, 255, 0.205);
-    border-radius:10px;
-
-  }
-
-  .spanReception{
-    width:max-content !important;
-    color:white;
-    clear:both;
-    margin:10 10 2 10;
-    padding:10 10 5 10;
-    height:30px;
-    background-color: rgba(255, 255, 255, 0.205);
-    border-radius:10px;
-
-  }
-
-  .hourEnvoi{
-    width:max-content !important;
-    color:black;
-    clear:both;
-    margin-left:auto !important;
-    margin-right:15px;
-    color: rgb(255, 255, 255); 
-    margin-bottom:15px; 
-  }
-
-  .hourReception{
-    width:max-content !important;
-    color:black;
-    clear:both;
-    margin-left:15px;
-    color: rgb(255, 255, 255);  
-  }
-
-  .nomEnvoi{
-    width:max-content !important;
-    clear:both;
-    margin-left:auto !important;
-    margin-right:15px;
-    margin-bottom:-5px;
-    margin-top:10px;
-    text-shadow: grey 0.05em 0.05em 0.1em
-  }
-
-  .nomReception{
-    width:max-content !important;
-    clear:both;
-    margin-left:15px;
-    margin-top:10px;
-    margin-bottom:-5px;
-    text-shadow: grey 0.05em 0.05em 0.1em  
-  }
-
-
-  .span_grey{
-    background-color: #CCC;
-    display:block;
-  }
-
-  .span_white{
-    display:block;
-  }
-
-  #list_pseudos span{
-    text-align:center;
-    text-shadow: grey 0.05em 0.05em 0.1em;
-    margin-bottom: 5px;
-  }
-
-  .pseudos{
-    display:block;
-  }
-
-  #titleEnLigne{
-    text-align:center;
-    clear:both;
-    color:white;
-  }
-
-  #menuGauche{
-    position:absolute;
-    height:200px;
-    display:block;
-    min-width:20%;
-    margin:0 auto;
-  }
-
-  #message-container {
-    margin:0 auto;
-    height:80%;
-    width: 60%;
-    overflow:auto;
-    box-shadow: 1px 1px 12px rgba(0, 0, 0, 0.1);
-    flex-grow: 1;
-    background-color: rgba(255, 255, 255, 0.1);
-    scrollbar-width: none;
-    border-radius:5px;
-  }
-
-  #send-container {
-    bottom: 0;
-    margin:0 auto;
-    width: 60%;
-    display: flex;
-  }
-
-  #bouton{
-    width:100px;
-    height:30px;
-    background-color: rgba(255, 255, 255, 0.521);
-    text-align:center;
-    padding-top:10px;
-    color:white;
-    cursor: pointer;
-    transition: all 0.5s ease-out;
-  } 
-
-  #bouton:hover{
-    background-color: rgba(255, 255, 255, 0.281);
-  }
-
-  #burgerMenu{
-    position:absolute;
-    height:27px;
-    width:27px;
-    display:none;
-    margin:0 auto;
-  }
-
-  .burger {
-    width: 35px;
-    height: 5px;
-    background-color: rgb(255, 255, 255);
-    margin: 6px 0;
-  }
-
-  ::-webkit-scrollbar {
-    display: none;
-}
-
-::-moz-scrollbar {
-  display: none;
-}
-
-#imageco{
-  width: 10px;
-  height: 10px;
-}
-
-.closebtn{
-  position:absolute;
-  top:7%;
-  right:15%;
-  font-size:60px;
-  cursor:pointer;
-  color:#fff;
-
-}
-
-@media (max-width:950px){
-  .popup_wrap{
-    width:70%;
-  }
-}
-
-@media (max-width:768px){
-  #bot{
-    height:10%;
-  }
-
-  #message-container{
-    width:auto;
-    height:80%;
-  }
-
-  #burgerMenu{
-    display:block;
-  }
-
-  #menuGauche{
-    display:none;
-    overflow:auto;
-    position:absolute;
-    margin-left:auto; 
-    margin-right:auto;
-    margin-top:100px;
-    min-height:300px;
-    background: linear-gradient(120deg, rgba(23, 190, 187, 0.650), rgba(240, 166, 202, 0.650));
-    z-index: 3;
-    top: 0;
-    left:30%;
-    right:30%;
-    bottom: 0;
-  }
-
-}
-
-@media (max-width:700px){
-    .pseudo_select input{
-      display:inline-block
-    }
-}
+      
+    
+    </div>
+  <div id="top" class="content">
+    <div id="burgerMenu">
+    <div class="burger"></div>
+    <div class="burger"></div>
+    <div class="burger"></div>
+    </div>
+    <div id="titreTop"><h1>TEAM CHAT 34</h1></div>
+  </div>
+  <div id="overlay_b">
+    <span class="closebtn" onclick="closeOverlay()" title="Close Overlay"> &#215 </span>
+  </div> 
+      <div id="menuGauche"> 
+        <div id="titleEnLigne" class="pseudos">En ligne <img id="imageco" src="rond.png"></div>
+        <div id="list_pseudos" class="pseudos"></div>
+      </div>
+  <div id="message-container" class="content"></div>
+  <div id="send-container" class="content">
+    <input type="text" id="message-input" placeholder="Envoyer un message au chat..." maxlength="100" onkeypress="enterKey(event)">
+    <div id="bouton">Envoyer</div><br/>
+    <div id="pseudoLocal"></div>
+  </div>
+  <div id="bot" class="content"></div>
+  <script src="script.js"></script>
+</body>
+</html>
