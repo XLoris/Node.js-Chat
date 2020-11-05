@@ -7,6 +7,7 @@ var colorLocal;
 var eligible;
 var timer = 0;
 var lastName;
+var placeMenu = true;
 
 window.onload = function () {
   on();
@@ -114,7 +115,7 @@ function off() {
     colorLocal = document.getElementById("color-input").value;
   }
   
-  else{alert('Pseudo déja pris')}
+  else if(pseudoLocal != "" && colorLocal != ""){alert('Pseudo déja pris')}
 }
 
 function addPseudo() {
@@ -177,7 +178,20 @@ function champ() {
   }
 }
 
+function showOverlay(){
+  document.getElementById('overlay_b').style.display = "block";
+  document.getElementById('menuGauche').style.display = "block";
+  
+}
+
+function closeOverlay(){
+  document.getElementById('overlay_b').style.display = "none";
+  document.getElementById('menuGauche').style.display = "none";
+}
+
 document.getElementById("bouton").addEventListener('click', champ);
+document.getElementById("burgerMenu").addEventListener('click', showOverlay);
+
 
 
 socket.on("new-message", function (content_serv) {
@@ -218,6 +232,8 @@ socket.on("new-message", function (content_serv) {
     container.appendChild(hm);
     container.scrollTop = container.scrollHeight;
 });
+
+
 
 
 
