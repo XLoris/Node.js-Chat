@@ -309,6 +309,9 @@ clear:both;
 }
 
 @media (max-width:768px){
+  #bot{
+    height:10%;
+  }
 
   #message-container{
     width:auto;
