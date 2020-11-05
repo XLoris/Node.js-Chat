@@ -1,13 +1,12 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <title>LE CHAT DE LA TEAM 34</title>
+    <title>TEAM CHAT 34</title>
     <script src="/socket.io/socket.io.js"></script> 
     <link rel="stylesheet" href="style.css">
   </head>
   <body>
-<body>
-                                
+<body>                  
     <div id="overlay">
        
       <div class="popup_wrap">
@@ -19,21 +18,32 @@
         <input type="button" id="ok-button" onclick="intermediaire()" value="OK">
         </div>
       </div>
+
+      
     
     </div>
-  <div id="top"></div>
-  <div id="menuGauche">
-  <div id="titleEnLigne" class="pseudos">En ligne <img id="imageco" src="rond.png"></div>
-  <div id="list_pseudos" class="pseudos"></div>
+  <div id="top" class="content">
+    <div id="burgerMenu">
+    <div class="burger"></div>
+    <div class="burger"></div>
+    <div class="burger"></div>
+    </div>
+    <div id="titreTop"><h1>TEAM CHAT 34</h1></div>
   </div>
-  <div>
-  <div id="message-container"></div>
-  <div id="send-container">
+  <div id="overlay_b">
+    <span class="closebtn" onclick="closeOverlay()" title="Close Overlay"> &#215 </span>
+  </div> 
+      <div id="menuGauche"> 
+        <div id="titleEnLigne" class="pseudos">En ligne <img id="imageco" src="rond.png"></div>
+        <div id="list_pseudos" class="pseudos"></div>
+      </div>
+  <div id="message-container" class="content"></div>
+  <div id="send-container" class="content">
     <input type="text" id="message-input" placeholder="Envoyer un message au chat..." maxlength="100" onkeypress="enterKey(event)">
     <div id="bouton">Envoyer</div><br/>
     <div id="pseudoLocal"></div>
   </div>
-  <div id="bot"></div>
+  <div id="bot" class="content"></div>
   <script src="script.js"></script>
 </body>
 </html>
