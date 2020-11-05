@@ -127,8 +127,8 @@ clear:both;
     clear:both;
     margin-left:auto !important;
     margin-right:15px;
-    color: rgb(255, 255, 255); 
     margin-bottom:15px; 
+    color: rgb(255, 255, 255); 
   }
 
   .hourReception{
@@ -136,6 +136,7 @@ clear:both;
     color:black;
     clear:both;
     margin-left:15px;
+    margin-bottom:15px; 
     color: rgb(255, 255, 255);  
   }
 
