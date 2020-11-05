@@ -1,12 +1,34 @@
-body {
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans&display=swap');
+
+/* $primary: rgba(23, 190, 187, 1);
+$secondary: rgba(240, 166, 202, 1);
+
+$active: rgba(23, 190, 187, 0.8);
+$busy: rgba(252, 100, 113, 0.8);
+$away: rgba(255, 253, 130, 0.8); */
+
+
+html, body {
+  background: linear-gradient(120deg, rgba(23, 190, 187, 1), rgba(240, 166, 202, 1));
+  font-family: 'Open Sans', sans-serif;
     padding: 0;
     margin: 0;
     overflow:hidden;
+    scrollbar-width:none;
   }
 
   h2, h3{
     padding-top:25px;
     text-align: center;
+  }
+
+  #top{
+    width:100%;
+    height:10%;
+  }
+  #bot{
+    width:100%;
+    height:10%;
   }
 
   #message-container div {
@@ -20,7 +42,12 @@ body {
 
 
   #message-input {
+    font-family: 'Open Sans', sans-serif;
+    width:80%;
     flex-grow: 1;
+    height:40px;
+    opacity:0.4;
+    padding-left:10px;
   }
 
 
@@ -62,11 +89,75 @@ clear:both;
 
 #pseudoLocal{
   margin-left: 10px;
+  display:none;
 }
 
   span{
     display:block;
   }
+
+  .spanEnvoi{
+    width:max-content !important;
+    color:white;
+    clear:both;
+    margin-left:auto !important;
+    margin:10 10 2 10;
+    padding:10 10 5 10;
+    height:30px;
+    background-color: rgba(255, 255, 255, 0.205);
+    border-radius:10px;
+
+  }
+
+  .spanReception{
+    width:max-content !important;
+    color:white;
+    clear:both;
+    margin:10 10 2 10;
+    padding:10 10 5 10;
+    height:30px;
+    background-color: rgba(255, 255, 255, 0.205);
+    border-radius:10px;
+
+  }
+
+  .hourEnvoi{
+    width:max-content !important;
+    color:black;
+    clear:both;
+    margin-left:auto !important;
+    margin-right:15px;
+    color: rgb(255, 255, 255); 
+    margin-bottom:15px; 
+  }
+
+  .hourReception{
+    width:max-content !important;
+    color:black;
+    clear:both;
+    margin-left:15px;
+    color: rgb(255, 255, 255);  
+  }
+
+  .nomEnvoi{
+    width:max-content !important;
+    clear:both;
+    margin-left:auto !important;
+    margin-right:15px;
+    margin-bottom:-5px;
+    margin-top:10px;
+    text-shadow: grey 0.05em 0.05em 0.1em
+  }
+
+  .nomReception{
+    width:max-content !important;
+    clear:both;
+    margin-left:15px;
+    margin-top:10px;
+    margin-bottom:-5px;
+    text-shadow: grey 0.05em 0.05em 0.1em  
+  }
+
 
   .span_grey{
     background-color: #CCC;
@@ -79,18 +170,21 @@ clear:both;
 
   #list_pseudos span{
     text-align:center;
+    text-shadow: grey 0.05em 0.05em 0.1em;
+    margin-bottom: 5px;
   }
 
   .pseudos{
     display:block;
   }
 
-  #titleP{
+  #titleEnLigne{
     text-align:center;
     clear:both;
+    color:white;
   }
 
-  #testB{
+  #menuGauche{
     position:absolute;
     height:200px;
     display:block;
@@ -103,25 +197,49 @@ clear:both;
     height:80%;
     width: 60%;
     overflow:auto;
-    border: 1px solid black;
+    box-shadow: 1px 1px 12px rgba(0, 0, 0, 0.1);
     flex-grow: 1;
-    background-color: rgb(255, 255, 255);
+    background-color: rgba(255, 255, 255, 0.1);
+    scrollbar-width: none;
+    border-radius:5px;
   }
 
   #send-container {
-    padding-bottom: 30px;
     bottom: 0;
     margin:0 auto;
-    background-color: white;
-
+    height:20% ;
     width: 60%;
     display: flex;
+  }
+
+  #bouton{
+    width:100px;
+    height:30px;
+    background-color: rgba(255, 255, 255, 0.521);
+    text-align:center;
+    padding-top:10px;
+    color:white;
+    cursor: pointer;
+    transition: all 0.5s ease-out;
+  } 
+
+  #bouton:hover{
+    background-color: rgba(255, 255, 255, 0.281);
   }
 
   ::-webkit-scrollbar {
     display: none;
 }
 
-html { overflow-y: hidden; }
+::-moz-scrollbar {
+  display: none;
+}
+
+#imageco{
+  width: 10px;
+  height: 10px;
+}
+
+
   
 

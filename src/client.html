@@ -3,7 +3,6 @@
     <meta charset="utf-8" />
     <title>LE CHAT DE LA TEAM 34</title>
     <script src="/socket.io/socket.io.js"></script> 
-    <script src="script.js"></script>
     <link rel="stylesheet" href="style.css">
   </head>
   <body>
@@ -15,24 +14,26 @@
         <h2>Bienvenue !</h2>
         <h3>Choisissez un pseudo.</h3>
         <div class="pseudo_select">
-        <input type="text" id="pseudo-input" onkeypress="enterKeyPseudo(event)">
-        <span> - </span>
+        <input type="text" id="pseudo-input" onkeypress="enterKeyPseudo(event)" onkeyup="verif(this);">
         <input type="color" id="color-input">
-        <input type="button" id="ok-button" onclick="off()" value="OK">
+        <input type="button" id="ok-button" onclick="intermediaire()" value="OK">
         </div>
       </div>
     
     </div>
-  <div id="testB">
-  <div id="titleP" class="pseudos">CONNECTED</div>
+  <div id="top"></div>
+  <div id="menuGauche">
+  <div id="titleEnLigne" class="pseudos">En ligne <img id="imageco" src="rond.png"></div>
   <div id="list_pseudos" class="pseudos"></div>
   </div>
   <div>
   <div id="message-container"></div>
   <div id="send-container">
-    <input type="text" id="message-input" onkeypress="enterKey(event)">
-    <input type="button" id="send-button" onclick="champ()" value="Envoyer"><br/>
+    <input type="text" id="message-input" placeholder="Envoyer un message au chat..." maxlength="100" onkeypress="enterKey(event)">
+    <div id="bouton">Envoyer</div><br/>
     <div id="pseudoLocal"></div>
   </div>
+  <div id="bot"></div>
+  <script src="script.js"></script>
 </body>
 </html>

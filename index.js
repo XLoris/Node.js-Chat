@@ -2,7 +2,8 @@ const http = require("http");
 const socketio = require("socket.io"); // On envoie client.html au client
 const tab_pseudos = [];
 const tab_colors = [];
-const express = require('express')
+const express = require('express');
+const { emit } = require("cluster");
 const app = express()
 const server = http.createServer(app)
 const io = socketio(server)
@@ -21,9 +22,27 @@ const io = socketio(server)
 // Quand un client se connecte, on lui crée une socket dediee
 io.on("connection", function (newSockClient) {
   newSockClient.on("send-chat-message", function (content) {
-    var content_serv = [content, tab_pseudos[newSockClient.id]];
+    var pseudo = tab_pseudos[newSockClient.id];
+    var content_serv = [content, pseudo, tab_colors[pseudo]];
     newSockClient.broadcast.emit("new-message", content_serv);
   });
+
+  newSockClient.on("requestList", function(pseudoLocal){
+    var list_pseudos = [];
+    var testPseudo = 1;
+    for (var key in tab_pseudos) {
+      list_pseudos.push(tab_pseudos[key]);
+    }
+    for(i = 0; i < list_pseudos.length ; i++){
+      if(list_pseudos[i] == pseudoLocal){
+        testPseudo = 0;
+        console.log('Ok bro')
+      }
+    } 
+      
+    newSockClient.emit("listCheck", testPseudo)
+  })
+
   newSockClient.on("entree-pseudo", function (pack) {
     tab_pseudos[newSockClient.id] = pack[0];
     tab_colors[pack[0]] = pack[1];
@@ -63,3 +82,5 @@ io.on("connection", function (newSockClient) {
 const PORT = process.env.PORT
 
 server.listen(PORT, () => console.log ('Server running on port '+PORT))
+
+
