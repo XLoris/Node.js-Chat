@@ -265,6 +265,7 @@ clear:both;
   }
 
   #burgerMenu{
+    padding-top:5px;
     position:absolute;
     height:27px;
     width:27px;
