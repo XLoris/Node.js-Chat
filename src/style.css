@@ -202,7 +202,7 @@ clear:both;
     flex-grow: 1;
     background-color: rgba(255, 255, 255, 0.1);
     scrollbar-width: none;
-    border-radius:5px;
+    border-radius:5px 5px 0 0;
   }
 
   #send-container {
