@@ -6,6 +6,7 @@ var dernierMessage = 2;
 var colorLocal;
 var eligible;
 var timer = 0;
+var lastName;
 
 window.onload = function () {
   on();
@@ -165,10 +166,10 @@ function champ() {
     nom.appendChild(above)
 
     var container = document.getElementById("message-container");
-    if(dernierMessage == -1 || dernierMessage == 2){
-    container.appendChild(nom);
-    dernierMessage = 1;
-    }
+    if(lastName != pseudoLocal){
+      container.appendChild(nom);
+      lastName = pseudoLocal
+      }
 
     container.appendChild(para);
     container.appendChild(hm);
@@ -209,9 +210,9 @@ socket.on("new-message", function (content_serv) {
   nom.appendChild(above);
 
   var container = document.getElementById("message-container");
-    if(dernierMessage == 1 || dernierMessage == 2){
+    if(lastName != pseudoIn){
     container.appendChild(nom);
-    dernierMessage = -1;
+    lastName = pseudoIn
     }
     container.appendChild(para);
     container.appendChild(hm);
